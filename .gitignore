@@ -1,0 +1,53 @@
+#IDE
+.idea
+.gulp
+.vscode
+
+# Application
+web/app/plugins/*
+!web/app/plugins/.gitkeep
+web/app/mu-plugins/*/
+web/app/upgrade
+web/app/uploads/*
+!web/app/uploads/.gitkeep
+
+# WordPress
+web/wp
+web/.htaccess
+
+# Logs
+*.log
+
+# Dotenv
+.env
+.env.*
+!.env.example
+
+# Requiers
+/vendor
+/node_modules
+
+# WP-CLI
+wp-cli.local.yml
+
+# Dist & test
+test
+dist
+
+# BD, logs
+*.sql
+*.sqlite
+
+# Other
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+yarn.lock
+debug.log
+
+# Special
+Thumbs.db
+Desktop.ini
+.DS_Store*
+ehthumbs.db
+Icon?

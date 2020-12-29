@@ -1,0 +1,29 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__column {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  &--col-3 {
+    width : 100%;
+    flex-wrap: wrap;
+
+    & > * {
+      flex-basis: 100%;
+      max-width: 100%;
+
+      @include media-breakpoint-up(lg) {
+        flex-basis: 33%;
+        max-width: 33%;
+      }
+
+      @include media-breakpoint-between(sm, lg) {
+        flex-basis: 50%;
+        max-width: 50%;
+      }
+    }
+  }
+}

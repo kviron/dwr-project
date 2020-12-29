@@ -1,0 +1,15 @@
+$colors     : (
+        primary : #309CFF,
+        secondary : #D4EBFF,
+        accent : #FF7C00,
+);
+
+$colors-map : ();
+
+@each $key, $value in $colors {
+  $map        : ();
+  $map        : map-merge($map, ($key: create_colour_map($value)));
+  $colors-map : map-merge($colors-map, $map);
+}
+
+$bc-base    : #eee;

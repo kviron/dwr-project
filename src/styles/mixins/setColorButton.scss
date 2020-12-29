@@ -1,0 +1,36 @@
+@mixin setColorButton($config) {
+	$type: nth($config, 1);
+	$background-color: nth($config, 2);
+	$color: nth($config, 3);
+	$border-color: nth($config, 4);
+
+	background-color: $background-color;
+	color: $color;
+	fill: $color;
+
+	&:hover {
+
+		@if $type == 'invert' {
+			background: $color;
+			color: if($background-color == transparent, #fff, $background-color );
+			fill: if($background-color == transparent, #fff, $background-color );
+		} @else {
+			background: call(get-function(nth($button-hover, 1)), $background-color, nth($button-hover, 2));
+			color: call(get-function(nth($button-hover, 1)), $color, nth($button-hover, 2));
+			fill: call(get-function(nth($button-hover, 1)), $color, nth($button-hover, 2));
+		}
+	}
+
+	&:active {
+		@if $type == 'invert' {
+			background: call(get-function(nth($button-active, 1)), $color, nth($button-active, 2));
+		} @else {
+			background: call(get-function(nth($button-active, 1)), $background-color, nth($button-active, 2));
+		}
+	}
+
+
+	@if $button-border != false {
+		border-color: $border-color;
+	}
+}

@@ -1,0 +1,27 @@
+@function fontSizeTitle($scale, $fs-base, $level){
+  $font-size : $fs-base;
+
+  @for $i from $level through 5 {
+    $mnoj: $font-size;
+    $font-size: $mnoj * $scale;
+  }
+
+  @return $font-size
+}
+
+
+@mixin getFontSizeTitle($scale, $fs-base){
+
+  @for $i from 1 through 6 {
+    @if ($i < 6){
+      h#{$i}{
+        font-size: fontSizeTitle($scale, $fs-base, $i);
+      }
+    }
+   @if ($i == 6){
+     h#{$i}{
+       font-size: fontSizeTitle($scale - 0.5, $fs-base, $i);
+     }
+   }
+  }
+}

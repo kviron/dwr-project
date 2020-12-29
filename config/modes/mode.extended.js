@@ -1,0 +1,1 @@
+const config = require('../webpack.config')({ dev: false, supportOldBrowser: true });

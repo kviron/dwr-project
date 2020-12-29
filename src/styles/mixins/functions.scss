@@ -1,0 +1,34 @@
+@function getColor($name, $percent) {
+
+  @each $key, $colors in $colors-map {
+
+    @if ($name == $key) {
+
+      @each $gradation, $color in $colors {
+
+        @if ($gradation == $percent) {
+          @return $color
+        }
+      }
+
+    }
+  }
+}
+
+@function create_colour_map($color) {
+  $map : (
+          95: transparentize($color, .95),
+          90: transparentize($color, .9),
+          80: transparentize($color, .8),
+          70: transparentize($color, .7),
+          60: transparentize($color, .6),
+          50: transparentize($color, .5),
+          40: transparentize($color, .4),
+          30: transparentize($color, .3),
+          20: transparentize($color, .2),
+          10: transparentize($color, .1),
+          5: transparentize($color, .05),
+          base: $color,
+  );
+  @return $map;
+}

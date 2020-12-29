@@ -1,0 +1,2 @@
+import './libs';
+import './svg';
