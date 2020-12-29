@@ -4,17 +4,33 @@
   "license": "MIT",
   "description": "WordPress + Docker + Webpack + React",
   "keywords": [
-    "wordpress", "composer", "webpack", "react", "wp", "docker", "wp-config"
+    "wordpress",
+    "composer",
+    "webpack",
+    "react",
+    "wp",
+    "docker",
+    "wp-config"
+  ],
+  "authors": [
+    {
+      "name": "kviron",
+      "homepage": "https://github.com/kviron/",
+      "role": "Developer"
+    }
   ],
   "repositories": [
     {
       "type": "composer",
       "url": "https://wpackagist.org",
-      "only": ["wpackagist-plugin/*", "wpackagist-theme/*"]
+      "only": [
+        "wpackagist-plugin/*",
+        "wpackagist-theme/*"
+      ]
     },
     {
-      "type":"vcs",
-      "url":"https://github.com/kviron/acf-wordpress.git"
+      "type": "vcs",
+      "url": "https://github.com/kviron/acf-wordpress.git"
     }
   ],
   "require": {
@@ -43,9 +59,15 @@
   "prefer-stable": true,
   "extra": {
     "installer-paths": {
-      "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
-      "web/app/plugins/{$name}/": ["type:wordpress-plugin"],
-      "web/app/themes/{$name}/": ["type:wordpress-theme"]
+      "web/app/mu-plugins/{$name}/": [
+        "type:wordpress-muplugin"
+      ],
+      "web/app/plugins/{$name}/": [
+        "type:wordpress-plugin"
+      ],
+      "web/app/themes/{$name}/": [
+        "type:wordpress-theme"
+      ]
     },
     "wordpress-install-dir": "web/wp"
   },
