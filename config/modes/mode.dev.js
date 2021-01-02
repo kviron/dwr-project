@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const browserSync = require('browser-sync').create();
+const dotEnv = require('dotenv').config()
 
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
