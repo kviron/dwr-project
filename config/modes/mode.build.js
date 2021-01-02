@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const config = require('../webpack.config')({ dev: false });
+const dotEnv = require('dotenv').config()
 
 webpack(config, (err, stats) => {
   if(err) {
