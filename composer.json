@@ -2,13 +2,12 @@
   "name": "kviron/dwr-project",
   "type": "project",
   "license": "MIT",
-  "description": "WordPress + Docker + Webpack + React",
+  "description": "WordPress + Docker + Webpack",
   "minimum-stability": "dev",
   "keywords": [
     "wordpress",
     "composer",
     "webpack",
-    "react",
     "wp",
     "docker",
     "wp-config"
@@ -44,8 +43,6 @@
     "roots/wp-config": "*",
     "roots/wp-password-bcrypt": "*",
     "kviron/acf-wordpress": "*",
-    "wp-cli/wp-cli": "*",
-    "wp-cli/scaffold-command": "*",
     "wpackagist-plugin/contact-form-7": "*"
   },
   "require-dev": {
@@ -72,11 +69,8 @@
     "wordpress-install-dir": "web/wp"
   },
   "scripts": {
-    "post-root-package-install": [
+    "first-start": [
       "php -r \"copy('.env.example', '.env');\""
-    ],
-    "test": [
-      "phpcs"
     ]
   }
 }

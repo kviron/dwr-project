@@ -6,8 +6,7 @@
  *
  *
  * @package WordPress
- * @subpackage Twenty_Nineteen
- * @since Twenty Nineteen 1.0
+ * @subpackage DWR_Theme
  */
 get_template_part('template-parts/header/container');
 
