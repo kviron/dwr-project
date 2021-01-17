@@ -1,35 +1,34 @@
-const path = require('path');
-const webpack = require('webpack');
-const browserSync = require('browser-sync').create();
-const dotEnv = require('dotenv').config()
+const path = require( 'path' );
+const webpack = require( 'webpack' );
+const browserSync = require( 'browser-sync' ).create();
+const dotEnv = require( 'dotenv' ).config();
 
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
+const webpackDevMiddleware = require( 'webpack-dev-middleware' );
+const webpackHotMiddleware = require( 'webpack-hot-middleware' );
 
-const {publicFolder, proxyTarget, watch} = require('../project.config');
-const webpackConfig = require('../webpack.config')({dev: true});
-const getPublicPath = require('../publicPath');
+const { publicFolder, proxyTarget, watch } = require( '../project.config' );
+const webpackConfig = require( '../webpack.config' )( { dev: true } );
+const getPublicPath = require( '../publicPath' );
 
-const compiler = webpack(webpackConfig);
-
+const compiler = webpack( webpackConfig );
 
 const middleware = [
-	webpackDevMiddleware(compiler, {
-		publicPath: getPublicPath(publicFolder),
+	webpackDevMiddleware( compiler, {
+		publicPath: getPublicPath( publicFolder ),
 		log: false,
 		logLevel: 'silent',
 		overlayWarnings: true,
 
 		// quiet: true
-	}),
-	webpackHotMiddleware(compiler, {
+	} ),
+	webpackHotMiddleware( compiler, {
 		log: false,
 		logLevel: 'none',
-		overlayWarnings: true
-	})
-]
+		overlayWarnings: true,
+	} ),
+];
 
-browserSync.init({
+browserSync.init( {
 	middleware,
 	proxy: {
 		target: proxyTarget,
@@ -37,18 +36,16 @@ browserSync.init({
 	},
 	// open: 'external',
 	open: false,
-	files: watch.map(element => path.resolve(element)),
+	files: watch.map( ( element ) => path.resolve( element ) ),
 	snippetOptions: {
 		rule: {
 			match: /<\/head>/,
-			fn: function (snippet, match) {
+			fn( snippet, match ) {
 				return `
-					${snippet}${match}
-					<script defer src="${getPublicPath(publicFolder)}js/app.js"></script>
-					<script defer src="${getPublicPath(publicFolder)}js/vendors.js"></script>
-				`;
-			}
-		}
-	}
-});
+                    ${ snippet }${ match }
+                    `;
+			},
+		},
+	},
+} );
 

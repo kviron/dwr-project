@@ -1,6 +1,6 @@
 const path = require('path');
-const Dotenv = require('dotenv-webpack');
 const webpack = require('webpack');
+const dotEnv = require( 'dotenv' ).config();
 const MiniCssExtractWebpackPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -55,6 +55,11 @@ module.exports = (options) => {
 
         },
         resolve: {
+            alias: {
+                '@fonts': path.resolve(__dirname, 'src/fonts'),
+                '@img': path.resolve('src/img'),
+                '@ico': path.resolve('src/ico'),
+            },
             extensions: [
                 '.js',
                 '.jsx',
@@ -171,10 +176,6 @@ module.exports = (options) => {
         },
         plugins: [
             ...(dev ? [
-                new Dotenv({
-                        systemvars: true,
-                    }
-                ),
                 new webpack.HotModuleReplacementPlugin(),
                 new FriendlyErrorsWebpackPlugin(),
                 new webpack.SourceMapDevToolPlugin({
