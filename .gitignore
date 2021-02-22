@@ -26,6 +26,7 @@ web/.htaccess
 # Requiers
 /vendor
 /node_modules
+/web/app/vendor/
 
 # WP-CLI
 wp-cli.local.yml
@@ -51,3 +52,4 @@ Desktop.ini
 .DS_Store*
 ehthumbs.db
 Icon?
+
