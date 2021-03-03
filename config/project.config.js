@@ -1,14 +1,14 @@
 module.exports = {
-	context: 'src',
-	entry: {
-		app: '/',
-	},
-	devtool: 'cheap-module-eval-source-map',
-	outputFolder: `web/app/themes/${ process.env.WP_THEME_NAME }/assets/`,
-	publicFolder: 'src/',
-	proxyTarget: `${ process.env.WP_HOME }`,
+    context: `${process.env.WEBPACK_FOLDER}`,
+    entry: {
+        app: '/',
+    },
+    devtool: 'cheap-module-eval-source-map',
+    outputFolder: `${process.env.PUBLIC_FOLDER}/app/themes/${process.env.WP_THEME_NAME}/assets/`,
+    publicFolder: `${process.env.WEBPACK_FOLDER}/`,
+    proxyTarget: `${process.env.WP_HOME}`,
 
-	watch: [
-		`web/app/themes/${ process.env.WP_THEME_NAME }/**/*.php`,
-	],
+    watch: [
+        `${process.env.PUBLIC_FOLDER}/app/themes/${process.env.WP_THEME_NAME}/**/*.php`,
+    ],
 };

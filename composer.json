@@ -43,6 +43,7 @@
     "roots/wp-config": "*",
     "roots/wp-password-bcrypt": "*",
     "htmlburger/carbon-fields": "^3.2",
+    "kviron/acf-wordpress": "*",
     "kviron/media-wordpress": "*",
     "kviron/yseo-wordpress": "*",
     "mnsami/composer-custom-directory-installer": "^2.0"
