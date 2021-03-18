@@ -45,6 +45,9 @@
     "kviron/acf-wordpress": "*",
     "kviron/media-wordpress": "*",
     "kviron/yseo-wordpress": "*",
+    "wpackagist-plugin/classic-editor":"*",
+    "wpackagist-plugin/cyr2lat":"*",
+    "wpackagist-plugin/breadcrumb-navxt":"*",
     "mnsami/composer-custom-directory-installer": "^2.0"
   },
   "require-dev": {

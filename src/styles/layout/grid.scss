@@ -1,29 +1,39 @@
-.grid {
-  display: flex;
-  flex-wrap: wrap;
+@import "~fast-grid/fast-grid";
 
-  &__column {
-    overflow: hidden;
-    width: 100%;
+$grid : (
+        breakpoints: (
+                xs: 0px,
+                sm: 576px,
+                md: 768px,
+                lg: 992px,
+                xl: 1200px,
+        ),
+        columns: 12,
+        gap: 15px,
+        container: 15px,
+        box-sizing: border-box,
+        mode: flex
+);
+
+.row{
+  @include grid-row();
+}
+
+@for $i from 1 through map-get($grid, columns){
+  .col-#{$i}{
+    @include grid-col($i);
   }
-
-  &--col-3 {
-    width : 100%;
-    flex-wrap: wrap;
-
-    & > * {
-      flex-basis: 100%;
-      max-width: 100%;
-
-      @include media-breakpoint-up(lg) {
-        flex-basis: 33%;
-        max-width: 33%;
-      }
-
-      @include media-breakpoint-between(sm, lg) {
-        flex-basis: 50%;
-        max-width: 50%;
-      }
+  @each $name, $value in map-get($grid, breakpoints){
+    .col-#{$name}-#{$i}{
+      @include grid-col((
+              $name: $i
+      ));
     }
   }
+}
+
+//Fix bag horizontal scroll
+body{
+  max-width  : 100vw;
+  overflow-x : hidden;
 }

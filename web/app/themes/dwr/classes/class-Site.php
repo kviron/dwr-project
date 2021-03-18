@@ -3,30 +3,32 @@
 
 class Site {
     /**
-     * @var string
+     * @var array
+     * Params teheme
      */
-    public static $path;
+    public static $theme = [];
+
 
     /**
-     * @var string
+     * Set init params
      */
-    public static $url;
+    public static function init(){
+        self::setUrlTheme(get_template_directory());
+        self::setPathTheme(get_template_directory_uri());
+    }
 
     /**
      * Get url site
      */
-    public static function setUrl($url_site){
-        self::$url = $url_site;
+    public static function setUrlTheme($url_site){
+        self::$theme['url'] = $url_site;
     }
 
     /**
      * Get path theme
      */
-    public static function setPath($path_theme){
-        self::$path = $path_theme;
+    public static function setPathTheme($path_theme){
+        self::$theme['path'] = $path_theme;
     }
 
 }
-
-Site::setPath(get_template_directory());
-Site::setUrl(get_template_directory_uri());

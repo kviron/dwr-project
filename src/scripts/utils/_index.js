@@ -1,2 +1,1 @@
 import './libs';
-import './svg';

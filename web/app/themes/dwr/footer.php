@@ -5,4 +5,12 @@
  * @package WordPress
  * @subpackage DWR_Theme
  */
-get_template_part('template-parts/footer/container');
+
+		do_action('site_footer'); ?>
+
+        <div class="site-scripts">
+            <?php wp_footer(); ?>
+        </div>
+    </div>
+</body>
+</html>
