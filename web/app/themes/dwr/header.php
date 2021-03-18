@@ -8,6 +8,6 @@
  * @package WordPress
  * @subpackage DWR_Theme
  */
-get_template_part('template-parts/header/container');
+get_template_part('template-parts/header/meta-section');
 
 

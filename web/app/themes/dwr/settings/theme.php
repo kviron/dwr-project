@@ -9,14 +9,6 @@
 //    ));
 //}
 
-## Add custom menus
-register_nav_menus(array(
-    'header_top-menu' => 'Верхняя строка в шапке',
-    'footer_main_menu' => 'Главное меню в подвале',
-    'footer_category_menu' => 'Меню категорий в подвале'
-));
-
-
 ## Включение миниатюр записи
 add_theme_support('post-thumbnails');
 

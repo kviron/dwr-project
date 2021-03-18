@@ -1,12 +1,31 @@
 <?php
-require_once get_template_directory()."/carbon-fields/init.php";
+/**
+ * Add classes
+ */
+require_once get_template_directory()."/classes/_init.php";
 
-require_once get_template_directory()."/settings/_index.php";
+/**
+ * Add carbon-fields plugin
+ */
+require_once Site::$path."/custom-fields/init.php";
 
-require_once get_template_directory()."/post-types/_index.php";
+/**
+ * Add settings theme
+ */
+require_once Site::$path."/settings/_index.php";
 
-require_once get_template_directory()."/post-taxonomies/_index.php";
+/**
+ * Add post-types files
+ */
+require_once Site::$path."/post-types/_index.php";
 
-require_once get_template_directory()."/includes/_index.php";
+/**
+ * Add manifest and seo files
+ */
+require_once Site::$path."/manifest/_index.php";
 
-require_once get_template_directory()."/hooks/_index.php";
+/**
+ * Add includes
+ */
+require_once Site::$path."/includes/_index.php";
+

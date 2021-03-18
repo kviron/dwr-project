@@ -42,7 +42,6 @@
     "roots/wordpress": "*",
     "roots/wp-config": "*",
     "roots/wp-password-bcrypt": "*",
-    "htmlburger/carbon-fields": "^3.2",
     "kviron/acf-wordpress": "*",
     "kviron/media-wordpress": "*",
     "kviron/yseo-wordpress": "*",
@@ -59,7 +58,6 @@
   "prefer-stable": true,
   "extra": {
     "installer-paths": {
-      "web/app/vendor/{$vendor}/{$name}": ["htmlburger/carbon-fields"],
       "web/app/mu-plugins/{$name}/": [
         "type:wordpress-muplugin"
       ],

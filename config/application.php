@@ -35,7 +35,7 @@ if (file_exists($root_dir . '/.env')) {
  *
  * @var string
  */
-$webroot_dir = $root_dir . env('PUBLIC_FOLDER');
+$webroot_dir = $root_dir . './' . env('PUBLIC_FOLDER');
 
 /**
  * Set up our global environment constant and load its config first
