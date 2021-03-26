@@ -16,9 +16,9 @@ class Site
     public static $vars = [];
 
     public static function init(){
-        self::setThemeUrl(get_template_directory());
-        self::setThemePath(get_template_directory_uri());
-        self::setThemeName(get_template_directory_uri());
+        self::set_theme_url(get_template_directory());
+        self::set_theme_path(get_template_directory_uri());
+        self::set_theme_name(get_template_directory_uri());
     }
 
     public static function set_theme_url($url_site){
@@ -29,9 +29,9 @@ class Site
     /**
      * Set url site
      */
-    public static function set_theme_name($url_site){
-        self::$theme['name'] = env('WP_THEME_NAME');
-    }
+//    public static function set_theme_name($url_site){
+//        self::$theme['name'] = env('WP_THEME_NAME');
+//    }
 
     /**
      * Set path theme
