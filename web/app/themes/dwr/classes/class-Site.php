@@ -1,42 +1,48 @@
 <?php
 
+use function Env\env;
+
 class Site
 {
     /**
-     * @var string
+     * @var array
      */
     public static $theme = [];
 
     /**
-     * @var string
+     * @var array
+     * Params teheme
      */
     public static $vars = [];
 
-    /**
-     * @var array
-     */
-    public static $phones;
-
-    /**
-     * @var array
-     */
-    public static $emails;
-
-    /**
-     * @var array
-     */
-    public static $address;
-
-    /**
-     * Get path theme
-     */
-    public static function init()
-    {
-        self::$theme['path'] = get_template_directory() . '/';
-        self::$theme['url']  = get_template_directory_uri() . '/';
+    public static function init(){
+        self::set_theme_url(get_template_directory());
+        self::set_theme_path(get_template_directory_uri());
+        self::set_theme_name(get_template_directory_uri());
     }
 
-    public static function thePosts($post_type, $args = [])
+    public static function set_theme_url($url_site){
+        self::$theme['url'] = $url_site;
+    }
+
+
+    /**
+     * Set url site
+     */
+//    public static function set_theme_name($url_site){
+//        self::$theme['name'] = env('WP_THEME_NAME');
+//    }
+
+    /**
+     * Set path theme
+     */
+    public static function set_theme_path($path_theme){
+
+        self::$theme['path'] = $path_theme;
+    }
+
+
+    public static function the_posts($post_type, $args = [])
     {
         global $wp_query;
         $container = [];
@@ -75,7 +81,7 @@ class Site
         wp_reset_postdata();
     }
 
-    public static function getPosts($post_type, $args = [])
+    public static function ge_posts($post_type, $args = [])
     {
         $args['post_type'] = $post_type ?? 'post';
 
@@ -101,7 +107,7 @@ class Site
         return $posts;
     }
 
-    public static function getTypePage()
+    public static function get_type_page()
     {
         if (is_front_page()) {
             return 'front_page';

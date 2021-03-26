@@ -45,6 +45,7 @@
     "kviron/acf-wordpress": "*",
     "kviron/media-wordpress": "*",
     "kviron/yseo-wordpress": "*",
+    "wpackagist-plugin/acf-to-rest-api":"*",
     "wpackagist-plugin/classic-editor":"*",
     "wpackagist-plugin/cyr2lat":"*",
     "wpackagist-plugin/breadcrumb-navxt":"*",
