@@ -19,6 +19,14 @@ use function Env\env;
 $root_dir = dirname(__DIR__);
 
 /**
+ * Document Root
+ *
+ * @var string
+ */
+$webroot_dir = $root_dir . '/public_html';
+
+
+/**
  * Use Dotenv to set required environment variables and load .env file in root
  */
 $dotenv = Dotenv\Dotenv::createUnsafeImmutable($root_dir);
@@ -29,13 +37,6 @@ if (file_exists($root_dir . '/.env')) {
         $dotenv->required(['DB_NAME', 'DB_USER', 'DB_PASSWORD']);
     }
 }
-
-/**
- * Document Root
- *
- * @var string
- */
-$webroot_dir = $root_dir . '/' . env('PUBLIC_FOLDER');
 
 /**
  * Set up our global environment constant and load its config first

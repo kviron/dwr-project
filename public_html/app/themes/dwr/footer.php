@@ -6,7 +6,13 @@
  * @subpackage DWR_Theme
  */
 
-		do_action('site_footer'); ?>
+
+/**
+ * Hook site_footer
+ *
+ */
+do_action('site_footer');
+?>
 
         <div class="site-scripts">
             <?php wp_footer(); ?>

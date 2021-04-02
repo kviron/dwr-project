@@ -14,8 +14,14 @@
     <head>
         <?php wp_head(); ?>
     </head>
-<body class="<?php body_class(); ?>">
-    <div class="root" id="root">     
-    <?php do_action('site_header'); ?>
+<body <?php body_class() ?>>
+    <div class="root" id="root">
+    <?php
+    /**
+     * Hook site_header
+     * 
+     */
+    do_action('site_header');
+    ?>
 
 

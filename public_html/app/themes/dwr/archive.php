@@ -9,11 +9,11 @@
 get_header();
 ?>
 
-	<main id="arhive" class="arhive-page">
+	<div id="archive" class="archive">
 
-		
 
-	</main>
+
+	</div>
 
 <?php
 get_footer();
