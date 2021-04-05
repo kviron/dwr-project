@@ -75,7 +75,7 @@
     "wordpress-install-dir": "web/wp"
   },
   "scripts": {
-    "first-start": [
+    "post-root-package-install": [
       "php -r \"copy('.env.example', '.env');\""
     ]
   }
