@@ -12,11 +12,7 @@
  *
  */
 do_action('site_footer');
-?>
-
-        <div class="site-scripts">
-            <?php wp_footer(); ?>
-        </div>
+wp_footer(); ?>
     </div>
 </body>
 </html>

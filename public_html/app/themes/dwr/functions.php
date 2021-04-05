@@ -38,6 +38,11 @@ require THEME_PATH . "/manifest/_index.php";
 require THEME_PATH . "/includes/_index.php";
 
 /**
+ * Add includes
+ */
+require THEME_PATH . "/template-parts/header/_init.php";
+
+/**
  * Init Site Class
  */
 Site::init(THEME_PATH, THEME_URL);
