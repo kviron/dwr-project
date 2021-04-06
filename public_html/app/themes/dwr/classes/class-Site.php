@@ -14,10 +14,10 @@ class Site {
 
     public static $item = [];
 
-    public static function init($items_default = 'template-parts/items/item-')
+    public static function init($theme_path, $theme_url, $items_default = 'template-parts/items/item-')
     {
-        self::set_theme_url(get_template_directory());
-        self::set_theme_path(get_template_directory_uri());
+        self::set_theme_url($theme_url);
+        self::set_theme_path($theme_path);
         self::$item['path'] = $items_default;
     }
 

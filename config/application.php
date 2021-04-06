@@ -49,10 +49,6 @@ define('WP_ENV', env('WP_ENV') ?: 'production');
 Config::define('WP_HOME', env('WP_HOME'));
 Config::define('WP_SITEURL', env('WP_SITEURL'));
 
-## Отключим возможность редактировать файлы в админке для тем, плагинов
-Config::define('DISALLOW_FILE_EDIT', true);
-
-
 /**
  * Custom Content Directory
  */
@@ -101,6 +97,8 @@ Config::define('DISABLE_WP_CRON', env('DISABLE_WP_CRON') ?: false);
 Config::define('DISALLOW_FILE_EDIT', true);
 // Disable plugin and theme updates and installation from the admin
 Config::define('DISALLOW_FILE_MODS', true);
+// Limit the number of post revisions that Wordpress stores (true (default WP): store every revision)
+Config::define('WP_POST_REVISIONS', env('WP_POST_REVISIONS') ?: true);
 
 /**
  * Debugging Settings
@@ -108,7 +106,7 @@ Config::define('DISALLOW_FILE_MODS', true);
 Config::define('WP_DEBUG_DISPLAY', false);
 Config::define('WP_DEBUG_LOG', env('WP_DEBUG_LOG') ?? false);
 Config::define('SCRIPT_DEBUG', false);
-ini_set('display_errors', 'off');
+ini_set('display_errors', '0');
 
 /**
  * Allow WordPress to detect HTTPS when used behind a reverse proxy or a load balancer

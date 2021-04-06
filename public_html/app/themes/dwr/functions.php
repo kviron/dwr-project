@@ -3,9 +3,10 @@
 /**
  * Declaring constants
  */
+define('WPLANG', 'ru_RU');
 define('THEME_PATH', get_template_directory());
 define('THEME_URL', get_template_directory_uri());
-define('THEME_ASSETS', THEME_PATH . '/assets');
+define('THEME_ASSETS', THEME_URL . '/assets');
 
 /**
  * Add classes
@@ -15,7 +16,7 @@ require_once  THEME_PATH . "/classes/_init.php";
 /**
  * Add carbon-fields plugin
  */
-require THEME_PATH . "/custom-fields/init.php";
+//require THEME_PATH . "/custom-fields/_init.php";
 
 /**
  * Add settings theme

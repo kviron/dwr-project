@@ -1,9 +1,10 @@
 <?php
 /**
- * Configuration overrides for WP_ENV === 'development'
+ * Configuration overrides for WP_ENV === 'dev'
  */
 
 use Roots\WPConfig\Config;
+use function Env\env;
 
 Config::define('WPLANG', 'ru_RU');
 Config::define('WP_DEFAULT_THEME', env('WP_THEME_NAME'));

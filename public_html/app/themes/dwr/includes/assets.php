@@ -31,8 +31,8 @@ function load_style() {
 //Enqueue scripts
 add_action( 'wp_enqueue_scripts', 'load_scripts', 20 );
 function load_scripts() {
-    wp_enqueue_script( 'vendors-js', THEME_ASSETS . '/assets/js/vendors.js', false, '1.0', true );
-    wp_enqueue_script( 'app-js', THEME_ASSETS . '/assets/js/app.js', array('jquery'), '1.0', true );
+    wp_enqueue_script( 'vendors-js', THEME_ASSETS . '/js/vendors.js', 'jquery', '1.0', true );
+    wp_enqueue_script( 'app-js', THEME_ASSETS . '/js/app.js', 'jquery', '1.0', true );
 }
 
 
