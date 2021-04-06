@@ -1,6 +1,4 @@
 <?php
-
-
 /**
  * Включаем поддержку svg
  */
@@ -50,7 +48,6 @@ function fix_svg_mime_type($data, $file, $filename, $mimes, $real_mime = '')
 
 add_filter('wp_check_filetype_and_ext', 'fix_svg_mime_type', 10, 5);
 
-
 /**
  * Формирует данные для отображения SVG как изображения в медиабиблиотеке.
  *
@@ -73,41 +70,44 @@ add_filter('wp_prepare_attachment_for_js', 'show_svg_in_media_library');
 
 
 /**
- * Отключаем постоянную проверку обновлений что бы ускорить админку
+ * Отключаем принудительную проверку новых версий WP, плагинов и темы в админке,
+ * чтобы она не тормозила, когда долго не заходил и зашел...
+ * Все проверки будут происходить незаметно через крон или при заходе на страницу: "Консоль > Обновления".
  *
- * @param string $value
- *
- * @return mixed|string
+ * @see     https://wp-kama.ru/filecode/wp-includes/update.php
+ * @author  Kama (https://wp-kama.ru)
+ * @version 1.1
  */
-function update_active_plugins($value = '')
-{
+if (is_admin()) {
+    // отключим проверку обновлений при любом заходе в админку...
+    remove_action('admin_init', '_maybe_update_core');
+    remove_action('admin_init', '_maybe_update_plugins');
+    remove_action('admin_init', '_maybe_update_themes');
 
-    if (( isset($value->response) ) && ( count($value->response) )) {
+    // отключим проверку обновлений при заходе на специальную страницу в админке...
+    remove_action('load-plugins.php', 'wp_update_plugins');
+    remove_action('load-themes.php', 'wp_update_themes');
 
-        // Get the list cut current active plugins
-        $active_plugins = get_option('active_plugins');
-        if ($active_plugins) {
+    // оставим принудительную проверку при заходе на страницу обновлений...
+    //remove_action( 'load-update-core.php', 'wp_update_plugins' );
+    //remove_action( 'load-update-core.php', 'wp_update_themes' );
 
-            //  Here we start to compare the $value->response
-            //  items checking each against the active plugins list.
-            foreach ($value->response as $plugin_idx => $plugin_item) {
+    // внутренняя страница админки "Update/Install Plugin" или "Update/Install Theme" - оставим не мешает...
+    //remove_action( 'load-update.php', 'wp_update_plugins' );
+    //remove_action( 'load-update.php', 'wp_update_themes' );
 
-                // If the response item is not an active plugin then remove it.
-                // This will prevent WordPress from indicating the plugin needs update actions.
-                if (!in_array($plugin_idx, $active_plugins))
-                    unset($value->response[$plugin_idx]);
-            }
-        } else {
-            // If no active plugins then ignore the inactive out of date ones.
-            foreach ($value->response as $plugin_idx => $plugin_item) {
-                unset($value->response);
-            }
-        }
-    }
-    return $value;
+    // событие крона не трогаем, через него будет проверяться наличие обновлений - тут все отлично!
+    //remove_action( 'wp_version_check', 'wp_version_check' );
+    //remove_action( 'wp_update_plugins', 'wp_update_plugins' );
+    //remove_action( 'wp_update_themes', 'wp_update_themes' );
+
+    /**
+     * отключим проверку необходимости обновить браузер в консоли - мы всегда юзаем топовые браузеры!
+     * эта проверка происходит раз в неделю...
+     * @see https://wp-kama.ru/function/wp_check_browser_version
+     */
+    add_filter('pre_site_transient_browser_' . md5($_SERVER['HTTP_USER_AGENT']), '__return_empty_array');
 }
-
-add_filter('transient_update_plugins', 'update_active_plugins');
 
 /**
  * Установим максимальное количество ревизий записи
@@ -234,4 +234,59 @@ if (1) {
             echo empty($thumb) ? ' ' : $thumb;
         }
     }
+}
+
+
+/**
+ * Заполняет поле для атрибута alt на основе заголовка Записи у картинки при её добавлении в контент.
+ *
+ * @param array $response
+ *
+ * @return array
+ */
+function change_empty_alt_to_title($response)
+{
+    if (!$response['alt']) {
+        $response['alt'] = sanitize_text_field($response['uploadedToTitle']);
+    }
+
+    return $response;
+}
+
+add_filter('wp_prepare_attachment_for_js', 'change_empty_alt_to_title');
+
+
+/**
+ * Возможность загружать изображения для терминов (элементов таксономий: категории, метки).
+ *
+ * Пример получения ID и URL картинки термина:
+ *     $image_id = get_term_meta( $term_id, '_thumbnail_id', 1 );
+ *     $image_url = wp_get_attachment_image_url( $image_id, 'thumbnail' );
+ *
+ * @author  : Kama http://wp-kama.ru
+ *
+ * @version 3.0
+ */
+
+if (is_admin() && !class_exists('Term_Meta_Image')) {
+
+    // init
+    //add_action('current_screen', 'Term_Meta_Image_init');
+    add_action('admin_init', 'Term_Meta_Image_init');
+    function Term_Meta_Image_init()
+    {
+        $GLOBALS['Term_Meta_Image'] = new Term_Meta_Image();
+    }
+
+    // получаем ID термина на странице термина
+    //    $term_id = get_queried_object_id();
+
+    // получим ID картинки из метаполя термина
+    //    $image_id = get_term_meta( $term_id, '_thumbnail_id', 1 );
+
+    // ссылка на полный размер картинки по ID вложения
+    //    $image_url = wp_get_attachment_image_url( $image_id, 'full' );
+
+    // выводим картинку на экран
+    //    echo '<img src="'. $image_url .'" alt="" />';
 }

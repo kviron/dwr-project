@@ -46,4 +46,4 @@ require THEME_PATH . "/template-parts/header/_init.php";
 /**
  * Init Site Class
  */
-Site::init(THEME_PATH, THEME_URL);
+DWR::init(THEME_PATH, THEME_URL);

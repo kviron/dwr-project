@@ -1,6 +1,6 @@
 <?php
 
-class Site {
+class DWR {
     /**
      * @var array
      */
