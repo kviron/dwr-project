@@ -13,27 +13,27 @@ $lh-base  : 1.75;
 $lh-title : 1.3;
 
 
-:root {
+:root{
   font-size : $fz-base;
 }
 
-html {
+html{
   font-size : 100%;
 }
 
 
-body {
+body{
   font-family : $ff-base;
   font-weight : $fw-base;
   line-height : $lh-base;
   color       : $fc-base;
 }
 
-p {
+p{
   margin-bottom : 1rem;
 }
 
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5{
   margin      : 3rem 0 1.38rem;
   font-family : $ff-base;
   font-weight : $fw-title;
@@ -43,18 +43,16 @@ h1, h2, h3, h4, h5 {
 @include getFontSizeTitle($f-scale, $fz-base);
 
 
-small, .text_small {
+small, .text_small{
   font-size : 0.75rem;
 }
 
 a{
-  display: inline-flex;
-  align-items: center;
-
-  color: map-get($colors, primary);
-  text-decoration : none;
+  display     : inline-flex;
+  align-items : center;
+  color       : inherit;
 
   &:hover{
-    color: map-get($colors, accent);
+    color : map-get($colors, accent);
   }
 }
