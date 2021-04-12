@@ -1,115 +1,331 @@
-<p align="center">
-  <a href="https://roots.io/bedrock/">
-    <img alt="Bedrock" src="https://cdn.roots.io/app/uploads/logo-bedrock.svg" height="100">
-  </a>
-</p>
 
-<p align="center">
-  <a href="LICENSE.md">
-    <img alt="MIT License" src="https://img.shields.io/github/license/roots/bedrock?color=%23525ddc&style=flat-square" />
-  </a>
+# Docker Compose and WordPress
 
-  <a href="https://packagist.org/packages/roots/bedrock">
-    <img alt="Packagist" src="https://img.shields.io/packagist/v/roots/bedrock.svg?style=flat-square" />
-  </a>
+[![Build Status](https://travis-ci.org/urre/wordpress-nginx-docker-compose.svg?branch=master)](https://travis-ci.org/urre/wordpress-nginx-docker-compose)
 
-  <a href="https://circleci.com/gh/roots/bedrock">
-    <img alt="Build Status" src="https://img.shields.io/circleci/build/gh/roots/bedrock?style=flat-square" />
-  </a>
+[![Donate](https://img.shields.io/badge/Donation-green?logo=paypal&label=Paypal)](https://www.paypal.me/urbansanden)
 
-  <a href="https://twitter.com/rootswp">
-    <img alt="Follow Roots" src="https://img.shields.io/twitter/follow/rootswp.svg?style=flat-square&color=1da1f2" />
-  </a>
-</p>
+Use WordPress locally with Docker using [Docker compose](https://docs.docker.com/compose/)
 
-<p align="center">
-  <strong>A modern WordPress stack</strong>
-  <br />
-  Built with ❤️
-</p>
+## Contents
 
-<p align="center">
-  <a href="https://roots.io">Official Website</a> | <a href="https://roots.io/docs/bedrock/master/installation/">Documentation</a> | <a href="CHANGELOG.md">Change Log</a>
-</p>
++ A `Dockerfile` for extending a base image and using a custom [Docker image](https://github.com/urre/wordpress-nginx-docker-compose-image) with an [automated build on Docker Hub](https://cloud.docker.com/repository/docker/urre/wordpress-nginx-docker-compose-image)
++ PHP 7.4
++ Custom domain for example `myapp.local`
++ Custom nginx config in `./nginx`
++ Custom PHP `php.ini` config in `./config`
++ Volumes for `nginx`, `wordpress` and `mariadb`
++ [Bedrock](https://roots.io/bedrock/) - modern development tools, easier configuration, and an improved secured folder structure for WordPress
++ Composer
++ [WP-CLI](https://wp-cli.org/) - WP-CLI is the command-line interface for WordPress.
++ [MailHog](https://github.com/mailhog/MailHog) - An email testing tool for developers. Configure your outgoing SMTP server and view your outgoing email in a web UI.
++ [PhpMyAdmin](https://www.phpmyadmin.net/) - free and open source administration tool for MySQL and MariaDB
+	- PhpMyAdmin config in `./config`
++ CLI script to create a SSL certificate
 
-## Supporting
+## Instructions
 
-**Bedrock** is an open source project and completely free to use.
+<details>
+ <summary>Requirements</summary>
 
-However, the amount of effort needed to maintain and develop new features and products within the Roots ecosystem is not sustainable without proper financial backing. If you have the capability, please consider donating using the links below:
++ [Docker](https://www.docker.com/get-started)
++ [mkcert](https://github.com/FiloSottile/mkcert) for creating the SSL cert.
 
-<div align="center">
+Install mkcert:
 
-[![Donate via Patreon](https://img.shields.io/badge/donate-patreon-orange.svg?style=flat-square&logo=patreon")](https://www.patreon.com/rootsdev)
-[![Donate via PayPal](https://img.shields.io/badge/donate-paypal-blue.svg?style=flat-square&logo=paypal)](https://www.paypal.me/rootsdev)
+```
+brew install mkcert
+brew install nss # if you use Firefox
+```
 
-</div>
+</details>
 
-## Overview
+<details>
+ <summary>Setup</summary>
 
-Bedrock is a modern WordPress stack that helps you get started with the best development tools and project structure.
+ ### Setup Environment variables
 
-Much of the philosophy behind Bedrock is inspired by the [Twelve-Factor App](http://12factor.net/) methodology including the [WordPress specific version](https://roots.io/twelve-factor-wordpress/).
+Both step 1. and 2. below are required:
 
-## Features
+#### 1. For Docker and the CLI script (Required step)
 
-- Better folder structure
-- Dependency management with [Composer](https://getcomposer.org)
-- Easy WordPress configuration with environment specific files
-- Environment variables with [Dotenv](https://github.com/vlucas/phpdotenv)
-- Autoloader for mu-plugins (use regular plugins as mu-plugins)
-- Enhanced security (separated web root and secure passwords with [wp-password-bcrypt](https://github.com/roots/wp-password-bcrypt))
+Copy `.env.example` in the project root to `.env` and edit your preferences.
 
-## Requirements
+Example:
 
-- PHP >= 7.1
-- Composer - [Install](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
+```dotenv
+IP=127.0.0.1
+APP_NAME=myapp
+DOMAIN="myapp.local"
+DB_HOST=mysql
+DB_NAME=myapp
+DB_ROOT_PASSWORD=password
+DB_TABLE_PREFIX=wp_
+```
 
-## Installation
+#### 2. For WordPress (Required step)
 
-1. Create a new project:
-   ```sh
-   $ composer create-project roots/bedrock
-   ```
-2. Update environment variables in the `.env` file. Wrap values that may contain non-alphanumeric characters with quotes, or they may be incorrectly parsed.
+Edit `./src/.env.example` to your needs. During the `composer create-project` command described below, an `./src/.env` will be created.
 
-- Database variables
-  - `DB_NAME` - Database name
-  - `DB_USER` - Database user
-  - `DB_PASSWORD` - Database password
-  - `DB_HOST` - Database host
-  - Optionally, you can define `DATABASE_URL` for using a DSN instead of using the variables above (e.g. `mysql://user:password@127.0.0.1:3306/db_name`)
-- `WP_ENV` - Set to environment (`development`, `staging`, `production`)
-- `WP_HOME` - Full URL to WordPress home (https://example.com)
-- `WP_SITEURL` - Full URL to WordPress including subdirectory (https://example.com/wp)
-- `AUTH_KEY`, `SECURE_AUTH_KEY`, `LOGGED_IN_KEY`, `NONCE_KEY`, `AUTH_SALT`, `SECURE_AUTH_SALT`, `LOGGED_IN_SALT`, `NONCE_SALT`
-  - Generate with [wp-cli-dotenv-command](https://github.com/aaemnnosttv/wp-cli-dotenv-command)
-  - Generate with [our WordPress salts generator](https://roots.io/salts.html)
+Example:
 
-3. Add theme(s) in `web/app/themes/` as you would for a normal WordPress site
-4. Set the document root on your webserver to Bedrock's `web` folder: `/path/to/site/web/`
-5. Access WordPress admin at `https://example.com/wp/wp-admin/`
+```dotenv
+DB_NAME='myapp'
+DB_USER='root'
+DB_PASSWORD='password'
 
-## Documentation
+# Optionally, you can use a data source name (DSN)
+# When using a DSN, you can remove the DB_NAME, DB_USER, DB_PASSWORD, and DB_HOST variables
+# DATABASE_URL='mysql://database_user:database_password@database_host:database_port/database_name'
 
-Bedrock documentation is available at [https://roots.io/docs/bedrock/master/installation/](https://roots.io/docs/bedrock/master/installation/).
+# Optional variables
+DB_HOST='mysql'
+# DB_PREFIX='wp_'
 
-## Contributing
+WP_ENV='development'
+WP_HOME='https://myapp.local'
+WP_SITEURL="${WP_HOME}/wp"
+WP_DEBUG_LOG=/path/to/debug.log
 
-Contributions are welcome from everyone. We have [contributing guidelines](https://github.com/roots/guidelines/blob/master/CONTRIBUTING.md) to help you get started.
+# Generate your keys here: https://roots.io/salts.html
+AUTH_KEY='generateme'
+SECURE_AUTH_KEY='generateme'
+LOGGED_IN_KEY='generateme'
+NONCE_KEY='generateme'
+AUTH_SALT='generateme'
+SECURE_AUTH_SALT='generateme'
+LOGGED_IN_SALT='generateme'
+NONCE_SALT='generateme'
+```
 
-## Bedrock sponsors
+</details>
 
-Help support our open-source development efforts by [becoming a patron](https://www.patreon.com/rootsdev).
+<details>
+ <summary>Option 1). Use HTTPS with a custom domain</summary>
 
-<a href="https://kinsta.com/?kaid=OFDHAJIXUDIV"><img src="https://cdn.roots.io/app/uploads/kinsta.svg" alt="Kinsta" width="200" height="150"></a> <a href="https://carrot.com/"><img src="https://cdn.roots.io/app/uploads/carrot.svg" alt="Carrot" width="200" height="150"></a> <a href="https://www.c21redwood.com/"><img src="https://cdn.roots.io/app/uploads/c21redwood.svg" alt="C21 Redwood Realty" width="200" height="150"></a> <a href="https://wordpress.com/"><img src="https://cdn.roots.io/app/uploads/wordpress.svg" alt="WordPress.com" width="200" height="150"></a>
+1. Create a SSL cert:
 
-## Community
+```shell
+cd cli
+./create-cert.sh
+```
 
-Keep track of development and community news.
+This script will create a locally-trusted development certificates. It requires no configuration.
 
-- Participate on the [Roots Discourse](https://discourse.roots.io/)
-- Follow [@rootswp on Twitter](https://twitter.com/rootswp)
-- Read and subscribe to the [Roots Blog](https://roots.io/blog/)
-- Subscribe to the [Roots Newsletter](https://roots.io/subscribe/)
-- Listen to the [Roots Radio podcast](https://roots.io/podcast/)
+> mkcert needs to be installed like described in Requirements. Read more for [Windows](https://github.com/FiloSottile/mkcert#windows) and [Linux](https://github.com/FiloSottile/mkcert#linux)
+
+2. Continue on the Install step below
+
+</details>
+
+<details>
+ <summary>Option 2). Use a simple config</summary>
+
+1. Edit `nginx/default.conf.conf` to use this simpler config (without using a cert and HTTPS)
+
+```shell
+server {
+    listen 80;
+
+    root /var/www/html/web;
+    index index.php;
+
+    access_log /var/log/nginx/access.log;
+    error_log /var/log/nginx/error.log;
+
+    client_max_body_size 100M;
+
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+
+    location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass wordpress:9000;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+    }
+}
+
+```
+
+2. Edit the nginx service in `docker-compose.yml` to use port 80. 443 is not needed now.
+
+```shell
+  nginx:
+    image: nginx:latest
+    container_name: ${APP_NAME}-nginx
+    ports:
+      - '80:80'
+
+```
+
+3. Continue on the Install step below
+
+</details>
+
+<details>
+ <summary>Install</summary>
+
+```shell
+docker-compose run composer create-project
+```
+
+</details>
+
+<details>
+ <summary>Run</summary>
+
+```shell
+docker-compose up
+```
+
+Docker Compose will now start all the services for you:
+
+```shell
+Starting myapp-mysql    ... done
+Starting myapp-composer ... done
+Starting myapp-phpmyadmin ... done
+Starting myapp-wordpress  ... done
+Starting myapp-nginx      ... done
+Starting myapp-mailhog    ... done
+```
+
+🚀 Open [https://myapp.local](https://myapp.local) in your browser
+
+## PhpMyAdmin
+
+PhpMyAdmin comes installed as a service in docker-compose.
+
+🚀 Open [http://127.0.0.1:8082/](http://127.0.0.1:8082/) in your browser
+
+## MailHog
+
+MailHog comes installed as a service in docker-compose.
+
+🚀 Open [http://0.0.0.0:8025/](http://0.0.0.0:8025/) in your browser
+
+</details>
+
+<details>
+ <summary>Tools</summary>
+
+### Update WordPress Core and Composer packages (plugins/themes)
+
+```shell
+docker-compose run composer update
+```
+
+#### Use WP-CLI
+
+```shell
+docker exec -it myapp-wordpress bash
+```
+
+Login to the container
+
+```shell
+wp search-replace https://olddomain.com https://newdomain.com --allow-root
+```
+
+Run a wp-cli command
+
+> You can use this command first after you've installed WordPress using Composer as the example above.
+
+### Update plugins and themes from wp-admin?
+
+You can, but I recommend to use Composer for this only. But to enable this edit `./src/config/environments/development.php` (for example to use it in Dev)
+
+```shell
+Config::define('DISALLOW_FILE_EDIT', false);
+Config::define('DISALLOW_FILE_MODS', false);
+```
+
+### Useful Docker Commands
+
+When making changes to the Dockerfile, use:
+
+```bash
+docker-compose up -d --force-recreate --build
+```
+
+Login to the docker container
+
+```shell
+docker exec -it myapp-wordpress bash
+```
+
+Stop
+
+```shell
+docker-compose stop
+```
+
+Down (stop and remove)
+
+```shell
+docker-compose down
+```
+
+Cleanup
+
+```shell
+docker-compose rm -v
+```
+
+Recreate
+
+```shell
+docker-compose up -d --force-recreate
+```
+
+Rebuild docker container when Dockerfile has changed
+
+```shell
+docker-compose up -d --force-recreate --build
+```
+</details>
+
+<details>
+ <summary>Changelog</summary>
+
+#### 2021-03-16
+- Changed root `.env-example` to `.env.example` to match the git ignore patterns. Thanks [@scottnunemacher](https://github.com/scottnunemacher)
+#### 2021-03-05
+- Clarify steps in the readme
+#### 2021-03-02
+- Fixed a misstake so instead of `./src/.env-example`, it should be `./src/.env.example`.
+- Redirect HTTP to HTTPS. Thanks [@humblecoder](https://github.com/humblecoder)
+#### 2021-01-02
+- Use `NGINX_ENVSUBST_TEMPLATE_SUFFIX`. Use a template and better substution of ENV variables in nginx config.
+#### 2020-10-04
+- Added mariadb-client (Solves [#54](https://github.com/urre/wordpress-nginx-docker-compose/issues/54))
+#### 2020-09-15
+- Updated Bedrock. Update WordPress to 5.5.1 and other composer updates.
+#### 2020-07-12
+- Added Mailhog. Thanks [@mortensassi](https://github.com/mortensassi)
+#### 2020-05-03
+- Added nginx gzip compression
+#### 2020-04-19
+- Added Windows support for creating SSH cert, trusting it and setting up the host file entry. Thanks to [@styssi](https://github.com/styssi)
+#### 2020-04-12
+- Remove port number from `DB_HOST`. Generated database connection error in macOS Catalina. Thanks to [@nirvanadev](https://github.com/nirvanadev)
+- Add missing ENV variable from mariadb Thanks to [@vonwa](https://github.com/vonwa)
+#### 2020-03-26
+- Added phpMyAdmin config.Thanks to [@titoffanton](https://github.com/titoffanton)
+#### 2020-02-06
+- Readme improvements. Explain `/etc/hosts` better
+#### 2020-01-30
+- Use `Entrypoint` command in Docker Compose to replace the domain name in the nginx config. Removing the need to manually edit the domain name in the nginx conf. Now using the `.env` value `DOMAIN`
+- Added APP_NAME in `.env-example` Thanks to [@Dave3o3](https://github.com/Dave3o3)
+#### 2020-01-11
+- Added `.env` support for specifying your own app name, domain etc in Docker and cli scripts.
+- Added phpMyAdmin. Visit [http://127.0.0.1:8080/](http://127.0.0.1:8080/)
+
+#### 2019-08-02
+- Added Linux support. Thanks to [@faysal-ishtiaq](https://github.com/faysal-ishtiaq).
+
+</details>

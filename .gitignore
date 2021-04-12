@@ -1,19 +1,17 @@
-#IDE
 .idea
-.gulp
-.vscode
 
 # Application
-web/app/plugins/*
-!web/app/plugins/.gitkeep
-web/app/mu-plugins/*/
-web/app/upgrade
-web/app/uploads/*
-!web/app/uploads/.gitkeep
+public_html/app/plugins/*
+public_html/app/languages
+!public_html/app/plugins/.gitkeep
+public_html/app/mu-plugins/*/
+public_html/app/upgrade
+public_html/app/uploads/*
+!public_html/app/uploads/.gitkeep
 
 # WordPress
-web/wp
-web/.htaccess
+public_html/wp
+public_html/.htaccess
 
 # Logs
 *.log
@@ -23,33 +21,8 @@ web/.htaccess
 .env.*
 !.env.example
 
-# Requiers
+# Composer
 /vendor
-/node_modules
-/web/app/vendor/
 
 # WP-CLI
 wp-cli.local.yml
-
-# Dist & test
-test
-dist
-
-# BD, logs
-*.sql
-*.sqlite
-
-# Other
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-yarn.lock
-debug.log
-
-# Special
-Thumbs.db
-Desktop.ini
-.DS_Store*
-ehthumbs.db
-Icon?
-
