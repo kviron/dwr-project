@@ -21,7 +21,7 @@ services:
     container_name: ${APP_NAME}-mysql
     command: --lower_case_table_names=2
     volumes:
-       - './Docker/data/db:/var/lib/mysql'
+      - './Docker/data/db:/var/lib/mysql'
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
       - MYSQL_DATABASE=${DB_NAME}
@@ -38,6 +38,8 @@ services:
     depends_on:
       - mysql
     restart: always
+    user: www-data
+    command: wp language core install ${LOCAL} && wp language core activate ${LOCAL}
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin

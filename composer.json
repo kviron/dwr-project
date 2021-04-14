@@ -50,11 +50,9 @@
     "wpackagist-plugin/breadcrumb-navxt":"*",
     "wpackagist-plugin/contact-form-7":"*",
     "wpackagist-plugin/cyr2lat":"*",
-    "wpackagist-plugin/date-time-picker-field":"*",
     "wpackagist-plugin/debug-bar":"*",
     "wpackagist-plugin/debug-bar-actions-and-filters-addon":"*",
-    "wpackagist-plugin/webp-express":"*",
-    "qtranslate/qtranslate-xt":"*"
+    "wpackagist-plugin/webp-express":"*"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.5.6",
