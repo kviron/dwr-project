@@ -98,6 +98,7 @@ Config::define('DISALLOW_FILE_EDIT', true);
 // Disable plugin and theme updates and installation from the admin
 Config::define('DISALLOW_FILE_MODS', true);
 Config::define('WPLANG', env('WP_LANG') ?: 'en_EN');
+Config::define('WP_POST_REVISIONS', env('WP_POST_REVISIONS') ?: true);
 
 /**
  * Debugging Settings
