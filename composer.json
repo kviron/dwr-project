@@ -50,7 +50,7 @@
     "wpackagist-plugin/contact-form-7":"*",
     "wpackagist-plugin/cyr2lat":"*",
     "wpackagist-plugin/debug-bar":"*",
-    "wpackagist-plugin/debug-bar-actions-and-filters-addon":"*",
+    "wpackagist-plugin/debug-bar-actions-and-filters-addon":"*"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.5.6",
