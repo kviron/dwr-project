@@ -51,7 +51,6 @@
     "wpackagist-plugin/cyr2lat":"*",
     "wpackagist-plugin/debug-bar":"*",
     "wpackagist-plugin/debug-bar-actions-and-filters-addon":"*",
-    "wpackagist-plugin/webp-express":"*"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.5.6",
