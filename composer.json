@@ -40,7 +40,6 @@
     "roots/wp-config": "1.0.0",
     "roots/wp-password-bcrypt": "1.0.0",
     "kviron/media-wordpress": "*",
-    "kviron/wordpress-plugin-yseo": "*",
     "kviron/dwr-theme": "*",
     "kviron/advanced-custom-fields": "*",
     "mnsami/composer-custom-directory-installer": "*",
