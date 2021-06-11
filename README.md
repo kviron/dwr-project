@@ -18,8 +18,6 @@ Use WordPress locally with Docker using [Docker compose](https://docs.docker.com
 + [PhpMyAdmin](https://www.phpmyadmin.net/) - free and open source administration tool for MySQL and MariaDB
 	- PhpMyAdmin config in `./config`
 
-## Instructions
-
 <details>
  <summary>Requirements</summary>
 
@@ -27,18 +25,17 @@ Use WordPress locally with Docker using [Docker compose](https://docs.docker.com
 
 </details>
 
+## Instructions
+
 Deploy the project using the command
 ```shell
 composer create-project kviron/dwr-project
 ```
-
- <summary>Setup</summary>
-
  ### Setup Environment variables
 
 Copy `.env.example` in the project root to `.env` and edit your preferences.
 
-#### 1. For Docker like Server
+#### 1. For the Docker like Server
 
 Example:
 
@@ -49,7 +46,7 @@ DOMAIN=myapp.local
 DB_ROOT_PASSWORD=password
 ```
 
-#### 2. For local server (OpenServer, XAMP ....)
+#### 2. These settings are sufficient for connect database the server (OpenServer, XAMP ....)
 Example:
 
 ```dotenv
@@ -69,9 +66,18 @@ LOGGED_IN_SALT='generateme'
 NONCE_SALT='generateme'
 ```
 
-
+#### 3. Here settings for the Wordpress
+```dotenv
+WP_ENV=dev
+WP_HOME=http://myapp.local
+WP_SITEURL=${WP_HOME}/wp
+WP_DEBUG_LOG=/path/to/debug.log
+WP_POST_REVISIONS=5
+WP_LANG=ru_RU
+FS_METHOD=direct
+```
 <details>
- <summary>If you using Docker compose for server</summary>
+ <summary>Install with Docker</summary>
 
 1. Edit `nginx/default.conf.conf` to change the nginx server settings
 
@@ -115,18 +121,15 @@ server {
 
 ```
 
-3. Continue on the Install step below
-
-</details>
-
-<details>
- <summary>Install with docker</summary>
+3. Install project
 
 ```shell
 docker-compose run composer create-project
 ```
-
 </details>
+
+
+
 
 <details>
  <summary>Run with docker</summary>
@@ -148,13 +151,13 @@ Starting myapp-mailhog    ... done
 
 🚀 Open [http://myapp.local](http://myapp.local) in your browser
 
-## PhpMyAdmin (Docker)
+## PhpMyAdmin
 
 PhpMyAdmin comes installed as a service in docker-compose.
 
 🚀 Open [http://127.0.0.1:8082/](http://127.0.0.1:8082/) in your browser
 
-## MailHog (Docker)
+## MailHog
 
 MailHog comes installed as a service in docker-compose.
 
