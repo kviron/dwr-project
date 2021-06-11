@@ -33,7 +33,7 @@ services:
     build: .
     container_name: ${APP_NAME}-wordpress
     volumes:
-      - .:/var/www/html:rw,cached
+      - ${WORDPRESS_DIR}:/var/www/html:rw,cached
       - ./Docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini
     depends_on:
       - mysql
