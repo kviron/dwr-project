@@ -100,6 +100,9 @@ Config::define('DISALLOW_FILE_MODS', true);
 Config::define('WPLANG', env('WP_LANG') ?: 'en_EN');
 Config::define('WP_POST_REVISIONS', env('WP_POST_REVISIONS') ?: true);
 Config::define('FS_METHOD', env('FS_METHOD') ?: 'ftpext');
+Config::define('WP_MAX_MEMORY_LIMIT', env('WP_MAX_MEMORY_LIMIT') ?: '256M');
+Config::define('WP_MEMORY_LIMIT', env('WP_MAX_MEMORY_LIMIT') ?: '32M');
+Config::define('FORCE_SSL_LOGIN', env('FORCE_SSL_LOGIN') ?: false);
 
 /**
  * Debugging Settings
