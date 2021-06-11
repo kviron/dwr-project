@@ -27,7 +27,11 @@ Use WordPress locally with Docker using [Docker compose](https://docs.docker.com
 
 </details>
 
-<details>
+Deploy the project using the command
+```shell
+composer create-project kviron/dwr-project
+```
+
  <summary>Setup</summary>
 
  ### Setup Environment variables
@@ -65,7 +69,6 @@ LOGGED_IN_SALT='generateme'
 NONCE_SALT='generateme'
 ```
 
-</details>
 
 <details>
  <summary>If you using Docker compose for server</summary>
