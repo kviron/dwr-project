@@ -39,8 +39,6 @@
     "roots/wordpress": "*",
     "roots/wp-config": "1.0.0",
     "roots/wp-password-bcrypt": "1.0.0",
-    "kviron/media-wordpress": "*",
-    "kviron/dwr-theme": "*",
     "kviron/advanced-custom-fields": "*",
     "mnsami/composer-custom-directory-installer": "*",
     "wpackagist-plugin/acf-extended":"*",
@@ -48,13 +46,13 @@
     "wpackagist-plugin/acf-quickedit-fields":"*",
     "wpackagist-plugin/breadcrumb-navxt":"*",
     "wpackagist-plugin/contact-form-7":"*",
-    "wpackagist-plugin/cyr2lat":"*",
-    "wpackagist-plugin/debug-bar":"*",
-    "wpackagist-plugin/debug-bar-actions-and-filters-addon":"*"
+    "wpackagist-plugin/cyr2lat":"*"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.5.6",
-    "roave/security-advisories": "dev-master"
+    "roave/security-advisories": "dev-master",
+    "wpackagist-plugin/debug-bar":"*",
+    "wpackagist-plugin/debug-bar-actions-and-filters-addon":"*"
   },
   "config": {
     "optimize-autoloader": true,
