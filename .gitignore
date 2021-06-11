@@ -1,4 +1,5 @@
 .idea
+.vs
 
 # Application
 public_html/app/plugins/*
