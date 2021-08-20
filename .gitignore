@@ -1,5 +1,10 @@
+# Ides
 .idea
 .vs
+
+# Docker
+/docker/db/mysql/
+/docker/db/logs/
 
 # Application
 public_html/app/plugins/*

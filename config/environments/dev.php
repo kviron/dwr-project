@@ -5,6 +5,7 @@
 
 use Roots\WPConfig\Config;
 
+Config::define('WPLANG', 'ru_RU');
 Config::define('SAVEQUERIES', true);
 Config::define('WP_DEBUG', true);
 Config::define('WP_DEBUG_DISPLAY', true);

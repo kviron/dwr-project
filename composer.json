@@ -1,5 +1,5 @@
 {
-  "name": "roots/bedrock",
+  "name": "kviron/dwr-project",
   "type": "project",
   "license": "MIT",
   "description": "WordPress boilerplate with modern development tools, easier configuration, and an improved folder structure",
@@ -17,7 +17,7 @@
     }
   ],
   "keywords": [
-    "bedrock", "composer", "roots", "wordpress", "wp", "wp-config"
+    "bedrock", "composer", "roots", "wordpress", "wp", "wp-config", "docker"
   ],
   "support": {
     "issues": "https://github.com/roots/bedrock/issues",
@@ -45,7 +45,6 @@
     "wpackagist-plugin/acf-medium-editor-field":"*",
     "wpackagist-plugin/acf-quickedit-fields":"*",
     "wpackagist-plugin/breadcrumb-navxt":"*",
-    "wpackagist-plugin/contact-form-7":"*",
     "wpackagist-plugin/cyr2lat":"*"
   },
   "require-dev": {
