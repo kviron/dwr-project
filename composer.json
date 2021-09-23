@@ -40,6 +40,7 @@
     "roots/wp-config": "1.0.0",
     "roots/wp-password-bcrypt": "1.0.0",
     "kviron/advanced-custom-fields": "*",
+    "kviron/dwr-theme": "*",
     "mnsami/composer-custom-directory-installer": "*",
     "wpackagist-plugin/acf-extended":"*",
     "wpackagist-plugin/acf-medium-editor-field":"*",
