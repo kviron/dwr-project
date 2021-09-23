@@ -1,70 +1,46 @@
 
-# Docker Compose and WordPress
+# Wordpress Drozzi Project
+Проект для быстрой развертки сайта на wordpress с помощью composer.
+Проект возможно развернуть как на любом сервере AMPP так и через контейнер Docker встроенный в проект.
 
-Use WordPress locally with Docker using [Docker compose](https://docs.docker.com/compose/)
+## Параметры проекта
 
-## Contents
-
-+ A `Dockerfile` for extending a base image and using a custom [Docker image](https://github.com/urre/wordpress-nginx-docker-compose-image) with an [automated build on Docker Hub](https://cloud.docker.com/repository/docker/urre/wordpress-nginx-docker-compose-image)
 + PHP 7.4
-+ Custom domain for example `myapp.local`
-+ Custom nginx config in `./nginx`
-+ Custom PHP `php.ini` config in `./config`
-+ Volumes for `nginx`, `wordpress` and `mariadb`
-+ [Bedrock](https://roots.io/bedrock/) - modern development tools, easier configuration, and an improved secured folder structure for WordPress
-+ Composer
-+ [WP-CLI](https://wp-cli.org/) - WP-CLI is the command-line interface for WordPress.
-+ [MailHog](https://github.com/mailhog/MailHog) - An email testing tool for developers. Configure your outgoing SMTP server and view your outgoing email in a web UI.
-+ [PhpMyAdmin](https://www.phpmyadmin.net/) - free and open source administration tool for MySQL and MariaDB
-	- PhpMyAdmin config in `./config`
++ [Bedrock](https://roots.io/bedrock/) - улучшеная структура Wordpress проекта
++ [Composer](https://getcomposer.org/) - Пакетный менеджер для php
++ [WP-CLI](https://wp-cli.org/) - WP-CLI консоль для управления сайтом на Wordpress
++ [Docker](https://www.docker.com/get-started) - Контейниризация проекта для упрощеной развертки сложного проекта
 
-<details>
- <summary>Requirements</summary>
+## Установка
 
-+ [Docker](https://www.docker.com/get-started)
-
-</details>
-
-## Instructions
-
-Deploy the project using the command
+Создаем пустую папку проекта в любом месте и открываем в ней терминал, после нам нужно выполнить команду
 ```shell
-composer create-project kviron/dwr-project
-```
- ### Setup Environment variables
-
-Copy `.env.example` in the project root to `.env` and edit your preferences.
-
-#### 1. For the Docker like Server
-
-Example:
-
-```dotenv
-IP=127.0.0.1
-APP_NAME=myapp
-DOMAIN=myapp.local
-DB_ROOT_PASSWORD=password
+composer create-project kviron/dwr-project .
 ```
 
-#### 2. These settings are sufficient for connect database the server (OpenServer, XAMP ....)
-Example:
+Данная команда развернет самую последнию версию Wordpress, создаст файл переменных окружения .env и установит самые важные и часто используемые плагины для wordpress
 
-```dotenv
+
+ ## Настройка конфигов
+ В данном проекто есть только два файла отвечающих за конфиги.
+ `.env` в корне проекта и
+ `./public_html/app/themes/имя_темы/.env` отвечающий за конфиги webpack
+
+### Настройка конфигов проекта (.env в корне)
+Первая секция это настройка доступов к базе данных
+```
+## MySQL configs
+DB_NAME=dwr-project
+DB_USER=dwr-project
+DB_PASSWORD=dwr-project
+DB_ROOT_PASS=root
+DB_PORT=3306
 DB_HOST=localhost
-DB_NAME=myapp
-DB_USER=root
-DB_PASSWORD=password
-
-# Generate your keys here: https://roots.io/salts.html
-AUTH_KEY='generateme'
-SECURE_AUTH_KEY='generateme'
-LOGGED_IN_KEY='generateme'
-NONCE_KEY='generateme'
-AUTH_SALT='generateme'
-SECURE_AUTH_SALT='generateme'
-LOGGED_IN_SALT='generateme'
-NONCE_SALT='generateme'
+# DB_PREFIX='wp_'
+# DATABASE_URL='mysql://database_user:database_password@database_host:database_port/database_name'
 ```
+
+Если вы разворачиваете проект через Docker контейнер, то в параметр DB_HOST нужно будет указать имя контейнера базы данных
 
 #### 3. Here settings for the Wordpress
 ```dotenv
