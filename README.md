@@ -1,5 +1,5 @@
 
-# Wordpress Drozzi Project
+# Drozzi Wordpress Project
 Проект для быстрой развертки сайта на wordpress с помощью composer.
 Проект возможно развернуть как на любом сервере AMPP так и через контейнер Docker встроенный в проект.
 
