@@ -1,3 +1,3 @@
-path: public_html/wp
+path: web/wp
 server:
-  docroot: public_html
+  docroot: web

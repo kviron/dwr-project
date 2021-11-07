@@ -1,224 +1,115 @@
+<p align="center">
+  <a href="https://roots.io/bedrock/">
+    <img alt="Bedrock" src="https://cdn.roots.io/app/uploads/logo-bedrock.svg" height="100">
+  </a>
+</p>
 
-# Drozzi Wordpress Project
-Проект для быстрой развертки сайта на wordpress с помощью composer на структуре Bedrock.
-Проект возможно развернуть как на любом сервере AMPP так и через контейнер Docker встроенный в проект.
-
-## Параметры проекта
-
-+ PHP 7.4
-+ [Bedrock](https://roots.io/bedrock/) - улучшеная структура Wordpress проекта
-+ [Composer](https://getcomposer.org/) - Пакетный менеджер для php
-+ [WP-CLI](https://wp-cli.org/) - WP-CLI консоль для управления сайтом на Wordpress
-+ [Docker](https://www.docker.com/get-started) - Контейниризация проекта для упрощеной развертки сложного проекта
+<p align="center">
+  <a href="LICENSE.md">
+    <img alt="MIT License" src="https://img.shields.io/github/license/roots/bedrock?color=%23525ddc&style=flat-square" />
+  </a>
 
-## Установка
+  <a href="https://packagist.org/packages/roots/bedrock">
+    <img alt="Packagist" src="https://img.shields.io/packagist/v/roots/bedrock.svg?style=flat-square" />
+  </a>
 
-Создаем пустую папку проекта в любом месте и открываем в ней терминал, после нам нужно выполнить команду
-```shell
-composer create-project kviron/dwr-project .
-```
+  <a href="https://github.com/roots/bedrock/actions/workflows/ci.yml">
+    <img alt="Build Status" src="https://img.shields.io/github/workflow/status/roots/bedrock/CI?style=flat-square" />
+  </a>
 
-Данная команда развернет самую последнию версию Wordpress, создаст файл переменных окружения .env и установит самые важные и часто используемые плагины для wordpress
+  <a href="https://twitter.com/rootswp">
+    <img alt="Follow Roots" src="https://img.shields.io/twitter/follow/rootswp.svg?style=flat-square&color=1da1f2" />
+  </a>
+</p>
 
+<p align="center">
+  <strong>A modern WordPress stack</strong>
+  <br />
+  Built with ❤️
+</p>
 
- ## Настройка конфигов
- В данном проекто есть общий файл конифгов.
- `.env` в корне проекта
+<p align="center">
+  <a href="https://roots.io">Official Website</a> | <a href="https://roots.io/docs/bedrock/master/installation/">Documentation</a> | <a href="CHANGELOG.md">Change Log</a>
+</p>
 
-### Настройка конфигов проекта (.env в корне)
-Первая секция это настройка доступов к базе данных
-```
-## MySQL configs
-DB_NAME=dwr-project
-DB_USER=dwr-project
-DB_PASSWORD=dwr-project
-DB_ROOT_PASS=root
-DB_PORT=3306
-DB_HOST=localhost
-# DB_PREFIX='wp_'
-# DATABASE_URL='mysql://database_user:database_password@database_host:database_port/database_name'
-```
+## Supporting
 
-Если вы разворачиваете проект через Docker контейнер, то в параметр DB_HOST нужно будет указать имя контейнера базы данных
+**Bedrock** is an open source project and completely free to use.
 
-#### 3. Here settings for the Wordpress
-```dotenv
-WP_ENV=dev
-WP_HOME=http://myapp.local
-WP_SITEURL=${WP_HOME}/wp
-WP_DEBUG_LOG=/path/to/debug.log
-WP_POST_REVISIONS=5
-WP_LANG=ru_RU
-FS_METHOD=direct
-```
-<details>
- <summary>Install with Docker</summary>
+However, the amount of effort needed to maintain and develop new features and products within the Roots ecosystem is not sustainable without proper financial backing. If you have the capability, please consider donating using the links below:
 
-1. Edit `nginx/default.conf.conf` to change the nginx server settings
+<div align="center">
 
-```shell
-server {
-    listen 80;
+[![Donate via Patreon](https://img.shields.io/badge/donate-patreon-orange.svg?style=flat-square&logo=patreon")](https://www.patreon.com/rootsdev)
+[![Donate via PayPal](https://img.shields.io/badge/donate-paypal-blue.svg?style=flat-square&logo=paypal)](https://www.paypal.me/rootsdev)
 
-    root /var/www/html/web;
-    index index.php;
+</div>
 
-    access_log /var/log/nginx/access.log;
-    error_log /var/log/nginx/error.log;
+## Overview
 
-    client_max_body_size 100M;
+Bedrock is a modern WordPress stack that helps you get started with the best development tools and project structure.
 
-    location / {
-        try_files $uri $uri/ /index.php?$args;
-    }
+Much of the philosophy behind Bedrock is inspired by the [Twelve-Factor App](http://12factor.net/) methodology including the [WordPress specific version](https://roots.io/twelve-factor-wordpress/).
 
-    location ~ \.php$ {
-        try_files $uri =404;
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass wordpress:9000;
-        fastcgi_index index.php;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_param PATH_INFO $fastcgi_path_info;
-    }
-}
+## Features
 
-```
+- Better folder structure
+- Dependency management with [Composer](https://getcomposer.org)
+- Easy WordPress configuration with environment specific files
+- Environment variables with [Dotenv](https://github.com/vlucas/phpdotenv)
+- Autoloader for mu-plugins (use regular plugins as mu-plugins)
+- Enhanced security (separated web root and secure passwords with [wp-password-bcrypt](https://github.com/roots/wp-password-bcrypt))
 
-2. Edit the nginx service in `docker-compose.yml` to use any port (default 80)
+## Requirements
 
-```shell
-  nginx:
-    image: nginx:latest
-    container_name: ${APP_NAME}-nginx
-    ports:
-      - '80:80'
+- PHP >= 7.1
+- Composer - [Install](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
 
-```
+## Installation
 
-3. Install project
+1. Create a new project:
+   ```sh
+   $ composer create-project roots/bedrock
+   ```
+2. Update environment variables in the `.env` file. Wrap values that may contain non-alphanumeric characters with quotes, or they may be incorrectly parsed.
 
-```shell
-docker-compose run composer create-project
-```
-</details>
+- Database variables
+  - `DB_NAME` - Database name
+  - `DB_USER` - Database user
+  - `DB_PASSWORD` - Database password
+  - `DB_HOST` - Database host
+  - Optionally, you can define `DATABASE_URL` for using a DSN instead of using the variables above (e.g. `mysql://user:password@127.0.0.1:3306/db_name`)
+- `WP_ENV` - Set to environment (`development`, `staging`, `production`)
+- `WP_HOME` - Full URL to WordPress home (https://example.com)
+- `WP_SITEURL` - Full URL to WordPress including subdirectory (https://example.com/wp)
+- `AUTH_KEY`, `SECURE_AUTH_KEY`, `LOGGED_IN_KEY`, `NONCE_KEY`, `AUTH_SALT`, `SECURE_AUTH_SALT`, `LOGGED_IN_SALT`, `NONCE_SALT`
+  - Generate with [wp-cli-dotenv-command](https://github.com/aaemnnosttv/wp-cli-dotenv-command)
+  - Generate with [our WordPress salts generator](https://roots.io/salts.html)
 
+3. Add theme(s) in `web/app/themes/` as you would for a normal WordPress site
+4. Set the document root on your webserver to Bedrock's `web` folder: `/path/to/site/web/`
+5. Access WordPress admin at `https://example.com/wp/wp-admin/`
 
+## Documentation
 
+Bedrock documentation is available at [https://roots.io/docs/bedrock/master/installation/](https://roots.io/docs/bedrock/master/installation/).
 
-<details>
- <summary>Run with docker</summary>
+## Contributing
 
-```shell
-docker-compose up
-```
+Contributions are welcome from everyone. We have [contributing guidelines](https://github.com/roots/guidelines/blob/master/CONTRIBUTING.md) to help you get started.
 
-Docker Compose will now start all the services for you:
+## Bedrock sponsors
 
-```shell
-Starting myapp-mysql    ... done
-Starting myapp-composer ... done
-Starting myapp-phpmyadmin ... done
-Starting myapp-wordpress  ... done
-Starting myapp-nginx      ... done
-Starting myapp-mailhog    ... done
-```
+Help support our open-source development efforts by [becoming a patron](https://www.patreon.com/rootsdev).
 
-🚀 Open [http://myapp.local](http://myapp.local) in your browser
+<a href="https://kinsta.com/?kaid=OFDHAJIXUDIV"><img src="https://cdn.roots.io/app/uploads/kinsta.svg" alt="Kinsta" width="200" height="150"></a> <a href="https://k-m.com/"><img src="https://cdn.roots.io/app/uploads/km-digital.svg" alt="KM Digital" width="200" height="150"></a> <a href="https://carrot.com/"><img src="https://cdn.roots.io/app/uploads/carrot.svg" alt="Carrot" width="200" height="150"></a> <a href="https://www.c21redwood.com/"><img src="https://cdn.roots.io/app/uploads/c21redwood.svg" alt="C21 Redwood Realty" width="200" height="150"></a> <a href="https://wordpress.com/"><img src="https://cdn.roots.io/app/uploads/wordpress.svg" alt="WordPress.com" width="200" height="150"></a> <a href="https://pantheon.io/"><img src="https://cdn.roots.io/app/uploads/pantheon.svg" alt="Pantheon" width="200" height="150"></a>
 
-## PhpMyAdmin
+## Community
 
-PhpMyAdmin comes installed as a service in docker-compose.
+Keep track of development and community news.
 
-🚀 Open [http://127.0.0.1:8082/](http://127.0.0.1:8082/) in your browser
-
-## MailHog
-
-MailHog comes installed as a service in docker-compose.
-
-🚀 Open [http://0.0.0.0:8025/](http://0.0.0.0:8025/) in your browser
-
-</details>
-
-## Tools
-
-### Update WordPress Core and Composer packages (plugins/themes)
-
-whit Docker
-```shell
-docker-compose run composer update
-```
-
-with composer
-```shell
-composer reuqire wpackagist-plugin/plugin-name
-composer reuqire wpackagist-theme/theme-name
-```
-
-#### Use WP-CLI only with DOcker
-```shell
-docker exec -it myapp-wordpress bash
-```
-
-Login to the container
-
-```shell
-wp search-replace https://olddomain.com https://newdomain.com --allow-root
-```
-
-Run a wp-cli command
-
-> You can use this command first after you've installed WordPress using Composer as the example above.
-
-### Update plugins and themes from wp-admin?
-
-You can, but I recommend to use Composer for this only. But to enable this edit `./config/environments/development.php` (for example to use it in Dev)
-
-```shell
-Config::define('DISALLOW_FILE_EDIT', false);
-Config::define('DISALLOW_FILE_MODS', false);
-```
-
-### Useful Docker Commands
-
-When making changes to the Dockerfile, use:
-
-```bash
-docker-compose up -d --force-recreate --build
-```
-
-Login to the docker container
-
-```shell
-docker exec -it myapp-wordpress bash
-```
-
-Stop
-
-```shell
-docker-compose stop
-```
-
-Down (stop and remove)
-
-```shell
-docker-compose down
-```
-
-Cleanup
-
-```shell
-docker-compose rm -v
-```
-
-Recreate
-
-```shell
-docker-compose up -d --force-recreate
-```
-
-Rebuild docker container when Dockerfile has changed
-
-```shell
-docker-compose up -d --force-recreate --build
-```
+- Participate on the [Roots Discourse](https://discourse.roots.io/)
+- Follow [@rootswp on Twitter](https://twitter.com/rootswp)
+- Read and subscribe to the [Roots Blog](https://roots.io/blog/)
+- Subscribe to the [Roots Newsletter](https://roots.io/subscribe/)
+- Listen to the [Roots Radio podcast](https://roots.io/podcast/)

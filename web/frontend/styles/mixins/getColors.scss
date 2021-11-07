@@ -1,0 +1,24 @@
+@mixin set-fill($grad, $theme){
+  $select : '';
+
+  @if $theme {
+    $select : $grad + '-' + $theme;
+  }@else{
+    $select : $grad + '-' + 'light';
+  }
+
+  background-color : map-get($backgrounds, $select);
+  color: map-get($labels, $select);
+}
+
+@mixin color-text($grad, $theme){
+  $select : '';
+
+  @if $theme {
+    $select : $grad + '-' + $theme;
+  }@else{
+    $select : $grad + '-' + 'light';
+  }
+
+  color: map-get($labels, $select);
+}

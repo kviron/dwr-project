@@ -1,0 +1,60 @@
+$min   : 0;
+$max   : 300;
+$step  : 5;
+$value : $min;
+
+@while $value < $max {
+  .m-#{$value}{
+    margin : $value + px;
+  }
+  .mt-#{$value}{
+    margin-top : $value + px;
+  }
+  .mb-#{$value}{
+    margin-bottom : $value + px;
+  }
+  .ml-#{$value}{
+    margin-left : $value + px;
+  }
+  .mr-#{$value}{
+    margin-right : $value + px;
+  }
+
+  .mv-#{$value}{
+    margin-top    : $value + px;
+    margin-bottom : $value + px;
+  }
+
+  .mh-#{$value}{
+    margin-right : $value + px;
+    margin-left  : $value + px;
+  }
+
+  .p-#{$value}{
+    padding : $value + px;
+  }
+  .pt-#{$value}{
+    padding-top : $value + px;
+  }
+  .pb-#{$value}{
+    padding-bottom : $value + px;
+  }
+  .pl-#{$value}{
+    padding-left : $value + px;
+  }
+  .pr-#{$value}{
+    padding-right : $value + px;
+  }
+
+  .pv-#{$value}{
+    padding-top    : $value + px;
+    padding-bottom : $value + px;
+  }
+
+  .ph-#{$value}{
+    padding-left  : $value + px;
+    padding-right : $value + px;
+  }
+
+  $value : $value + $step;
+}

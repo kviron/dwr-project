@@ -23,12 +23,17 @@ $root_dir = dirname(__DIR__);
  *
  * @var string
  */
-$webroot_dir = $root_dir . '/public_html';
+$webroot_dir = $root_dir . '/web';
 
 /**
  * Use Dotenv to set required environment variables and load .env file in root
+ * .env.local will override .env if it exists
  */
-$dotenv = Dotenv\Dotenv::createImmutable($root_dir);
+$env_files = file_exists($root_dir . '/.env.local')
+    ? ['.env', '.env.local']
+    : ['.env'];
+
+$dotenv = Dotenv\Dotenv::createUnsafeImmutable($root_dir, $env_files, false);
 if (file_exists($root_dir . '/.env')) {
     $dotenv->load();
     $dotenv->required(['WP_HOME', 'WP_SITEURL']);
@@ -52,7 +57,7 @@ Config::define('WP_SITEURL', env('WP_SITEURL'));
 /**
  * Custom Content Directory
  */
-Config::define('CONTENT_DIR', '/app');
+Config::define('CONTENT_DIR', '/backend');
 Config::define('WP_CONTENT_DIR', $webroot_dir . Config::get('CONTENT_DIR'));
 Config::define('WP_CONTENT_URL', Config::get('WP_HOME') . Config::get('CONTENT_DIR'));
 
@@ -97,18 +102,14 @@ Config::define('DISABLE_WP_CRON', env('DISABLE_WP_CRON') ?: false);
 Config::define('DISALLOW_FILE_EDIT', true);
 // Disable plugin and theme updates and installation from the admin
 Config::define('DISALLOW_FILE_MODS', true);
-Config::define('WPLANG', env('WP_LANG') ?: 'en_EN');
+// Limit the number of post revisions that Wordpress stores (true (default WP): store every revision)
 Config::define('WP_POST_REVISIONS', env('WP_POST_REVISIONS') ?: true);
-Config::define('FS_METHOD', env('FS_METHOD') ?: 'ftpext');
-Config::define('WP_MAX_MEMORY_LIMIT', env('WP_MAX_MEMORY_LIMIT') ?: '256M');
-Config::define('WP_MEMORY_LIMIT', env('WP_MAX_MEMORY_LIMIT') ?: '32M');
-Config::define('FORCE_SSL_LOGIN', env('FORCE_SSL_LOGIN') ?: false);
 
 /**
  * Debugging Settings
  */
 Config::define('WP_DEBUG_DISPLAY', false);
-Config::define('WP_DEBUG_LOG', env('WP_DEBUG_LOG') ?? false);
+Config::define('WP_DEBUG_LOG', false);
 Config::define('SCRIPT_DEBUG', false);
 ini_set('display_errors', '0');
 

@@ -1,0 +1,41 @@
+@function fontSizeTitle($scale, $fs-base, $level){
+  $font-size : $fs-base;
+
+  @for $i from $level through 5 {
+    $mnoj: $font-size;
+    $font-size: $mnoj * $scale;
+  }
+
+  @return $font-size
+}
+
+
+@mixin getFontSizeTitle($scale, $fs-base, $sizes: ()){
+
+  @for $i from 1 through 6 {
+    @if ($i < 6){
+      h#{$i}{
+        font-size: (fontSizeTitle($scale, $fs-base, $i) * 0.8);
+
+        @each $key, $value in $sizes {
+          @include media-breakpoint-up($key){
+            font-size: (fontSizeTitle($scale, $fs-base, $i) * $value);
+          }
+        }
+      }
+
+      .title-h#{$i}{
+        font-size: fontSizeTitle($scale, $fs-base, $i);
+      }
+    }
+    @if ($i == 6){
+      h#{$i}{
+        font-size: fontSizeTitle($scale - 0.5, $fs-base, $i);
+      }
+
+      .title-h#{$i}{
+        font-size: fontSizeTitle($scale - 0.5, $fs-base, $i);
+      }
+    }
+  }
+}

@@ -23,19 +23,18 @@ function svg_upload_allow($mimes)
  */
 function fix_svg_mime_type($data, $file, $filename, $mimes, $real_mime = '')
 {
-    if (version_compare($GLOBALS['wp_version'], '5.1.0', '>='))
+    if (version_compare($GLOBALS['wp_version'], '5.1.0', '>=')) {
         $dosvg = in_array($real_mime, [
             'image/svg',
             'image/svg+xml'
         ]);
-    else
+    } else {
         $dosvg = ( '.svg' === strtolower(substr($filename, -4)) );
+    }
 
     if ($dosvg) {
-
         // разрешим
         if (current_user_can('manage_options')) {
-
             $data['ext']  = 'svg';
             $data['type'] = 'image/svg+xml';
         } // запретим
@@ -112,7 +111,9 @@ if (is_admin()) {
 /**
  * Установим максимальное количество ревизий записи
  */
-if (!defined('WP_POST_REVISIONS')) define('WP_POST_REVISIONS', 5);
+if (!defined('WP_POST_REVISIONS')) {
+    define('WP_POST_REVISIONS', 5);
+}
 
 
 /**
@@ -214,15 +215,15 @@ if (1) {
                     $height
                 ], true);
             } // из галереи...
-            elseif (
-            $attachments = get_children(
+            elseif ($attachments = get_children(
                 [
                     'post_parent'    => $post_id,
                     'post_mime_type' => 'image',
                     'post_type'      => 'attachment',
                     'numberposts'    => 1,
                     'order'          => 'DESC',
-                ])
+                ]
+            )
             ) {
                 $attach = array_shift($attachments);
                 $thumb  = wp_get_attachment_image($attach->ID, [
@@ -268,14 +269,13 @@ add_filter('wp_prepare_attachment_for_js', 'change_empty_alt_to_title');
  * @version 3.0
  */
 
-if (is_admin() && !class_exists('Term_Meta_Image')) {
-
+if (is_admin() && !class_exists('TermMetaImage')) {
     // init
     //add_action('current_screen', 'Term_Meta_Image_init');
     add_action('admin_init', 'Term_Meta_Image_init');
     function Term_Meta_Image_init()
     {
-        $GLOBALS['Term_Meta_Image'] = new Term_Meta_Image();
+        $GLOBALS['Term_Meta_Image'] = new TermMetaImage();
     }
 
     // получаем ID термина на странице термина

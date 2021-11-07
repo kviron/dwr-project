@@ -1,0 +1,23 @@
+$display : (
+  none,
+  block,
+  inline-block,
+  flex,
+  inline-flex,
+  grid,
+  inline-grid,
+);
+
+.d-none{
+  display: none!important;
+}
+
+@each $key, $value in $grid-breakpoints {
+  @each $dis in $display {
+    .d-#{$key}-#{$dis} {
+      @include media-breakpoint-up($key){
+        display: $dis!important;
+      }
+    }
+  }
+}

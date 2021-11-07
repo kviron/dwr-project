@@ -1,0 +1,53 @@
+$icon-display    : inline-flex;
+$icon-size-small : 16px;
+$icon-size-base  : 24px;
+$icon-size-large : 32px;
+
+#svg-icons {
+  display : none;
+}
+
+.icon {
+  display             : $icon-display;
+  justify-content     : center;
+  align-items         : center;
+  flex-shrink         : 0;
+
+  background-repeat   : no-repeat;
+  background-size     : contain;
+  background-position : center;
+  width               : $icon-size-base;
+  height              : $icon-size-base;
+
+  &_svg {
+    svg {
+      width  : 80%;
+      height : 80%;
+    }
+  }
+
+  &__image {
+    object-fit : contain;
+    width      : 100%;
+  }
+
+  svg {
+    height          : 100%;
+    max-height      : 35px;
+    display         : flex;
+    justify-content : flex-start;
+  }
+
+  &_size {
+
+    &_small {
+      width  : $icon-size-small;
+      height : $icon-size-small;
+    }
+
+    &_large {
+      width  : $icon-size-large;
+      height : $icon-size-large;
+    }
+  }
+}
