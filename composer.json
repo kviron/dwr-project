@@ -17,7 +17,7 @@
     }
   ],
   "keywords": [
-    "bedrock", "composer", "roots", "wordpress", "wp", "wp-config", "docker"
+    "bedrock", "composer", "roots", "wordpress", "wp", "wp-config"
   ],
   "support": {
     "issues": "https://github.com/roots/bedrock/issues",
@@ -32,27 +32,23 @@
   ],
   "require": {
     "php": ">=7.1",
-    "composer/installers": "^1.8",
-    "vlucas/phpdotenv": "^4.1.8",
+    "composer/installers": "^1.12",
+    "vlucas/phpdotenv": "^5.3",
     "oscarotero/env": "^2.1",
     "roots/bedrock-autoloader": "^1.0",
-    "roots/wordpress": "*",
+    "roots/bedrock-disallow-indexing": "^2.0",
+    "roots/wordpress": "5.8.1",
     "roots/wp-config": "1.0.0",
-    "roots/wp-password-bcrypt": "1.0.0",
-    "kviron/advanced-custom-fields": "*",
-    "kviron/dwr-theme": "*",
-    "mnsami/composer-custom-directory-installer": "*",
+    "roots/wp-password-bcrypt": "1.1.0",
+    "kviron/advanced-custom-fields": "^5.10.2",
     "wpackagist-plugin/acf-extended":"*",
-    "wpackagist-plugin/acf-medium-editor-field":"*",
-    "wpackagist-plugin/acf-quickedit-fields":"*",
-    "wpackagist-plugin/breadcrumb-navxt":"*",
-    "wpackagist-plugin/cyr2lat":"*"
+    "wpackagist-plugin/cyr2lat":"5.2.4"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "^3.5.6",
-    "roave/security-advisories": "dev-master",
-    "wpackagist-plugin/debug-bar":"*",
-    "wpackagist-plugin/debug-bar-actions-and-filters-addon":"*"
+    "squizlabs/php_codesniffer": "^3.6.0",
+    "roave/security-advisories": "dev-latest",
+    "symfony/var-dumper": "^v5.3.10",
+    "wpackagist-plugin/debug-bar":"*"
   },
   "config": {
     "optimize-autoloader": true,
@@ -62,11 +58,11 @@
   "prefer-stable": true,
   "extra": {
     "installer-paths": {
-      "public_html/app/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
-      "public_html/app/plugins/{$name}/": ["type:wordpress-plugin"],
-      "public_html/app/themes/{$name}/": ["type:wordpress-theme"]
+      "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
+      "web/app/plugins/{$name}/": ["type:wordpress-plugin"],
+      "web/app/themes/{$name}/": ["type:wordpress-theme"]
     },
-    "wordpress-install-dir": "public_html/wp"
+    "wordpress-install-dir": "web/wp"
   },
   "scripts": {
     "post-root-package-install": [

@@ -1,23 +1,16 @@
-# Ides
 .idea
-.vs
-
-# Docker
-/docker/db/mysql/
-/docker/db/logs/
 
 # Application
-public_html/app/plugins/*
-public_html/app/languages
-!public_html/app/plugins/.gitkeep
-public_html/app/mu-plugins/*/
-public_html/app/upgrade
-public_html/app/uploads/*
-!public_html/app/uploads/.gitkeep
+web/app/plugins/*
+!web/app/plugins/.gitkeep
+web/app/mu-plugins/*/
+web/app/upgrade
+web/app/uploads/*
+!web/app/uploads/.gitkeep
 
 # WordPress
-public_html/wp
-public_html/.htaccess
+web/wp
+web/.htaccess
 
 # Logs
 *.log
