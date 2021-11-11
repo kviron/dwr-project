@@ -37,7 +37,7 @@
     "oscarotero/env": "^2.1",
     "roots/bedrock-autoloader": "^1.0",
     "roots/bedrock-disallow-indexing": "^2.0",
-    "roots/wordpress": "5.8.1",
+    "roots/wordpress": "5.8.2",
     "roots/wp-config": "1.0.0",
     "roots/wp-password-bcrypt": "1.1.0",
     "kviron/advanced-custom-fields": "^5.10.2",
@@ -48,7 +48,8 @@
     "squizlabs/php_codesniffer": "^3.6.0",
     "roave/security-advisories": "dev-latest",
     "symfony/var-dumper": "^v5.3.10",
-    "wpackagist-plugin/debug-bar":"*"
+    "wpackagist-plugin/debug-bar":"*",
+    "wpackagist-plugin/wp-php-console": "*"
   },
   "config": {
     "optimize-autoloader": true,
@@ -58,18 +59,18 @@
   "prefer-stable": true,
   "extra": {
     "installer-paths": {
-      "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
-      "web/app/plugins/{$name}/": ["type:wordpress-plugin"],
-      "web/app/themes/{$name}/": ["type:wordpress-theme"]
+      "html/app/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
+      "html/app/plugins/{$name}/": ["type:wordpress-plugin"],
+      "html/app/themes/{$name}/": ["type:wordpress-theme"]
     },
-    "wordpress-install-dir": "web/wp"
+    "wordpress-install-dir": "html/wp"
   },
   "scripts": {
     "post-root-package-install": [
       "php -r \"copy('.env.example', '.env');\""
     ],
-    "test": [
-      "phpcs"
+    "db-export": [
+      "wp db export ./docker/dumps/dump.sql"
     ]
   }
 }

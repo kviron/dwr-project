@@ -1,18 +1,21 @@
 .idea
+.composer
 
 # Application
-web/app/plugins/*
-!web/app/plugins/.gitkeep
-web/app/mu-plugins/*/
-web/app/upgrade
-web/app/uploads/*
-!web/app/uploads/.gitkeep
+html/app/plugins/*
+html/app/languages/*
+!html/app/plugins/.gitkeep
+html/app/mu-plugins/*/
+html/app/upgrade
+html/app/uploads/*
+!html/app/uploads/.gitkeep
 
 # WordPress
-web/wp
-web/.htaccess
+html/wp
+html/.htaccess
 
 # Logs
+/log/
 *.log
 
 # Dotenv
@@ -21,7 +24,11 @@ web/.htaccess
 !.env.example
 
 # Composer
-/vendor
+/vendor/
 
 # WP-CLI
 wp-cli.local.yml
+
+#Docker
+docker/db/*
+!docker/db/.gitkeep
