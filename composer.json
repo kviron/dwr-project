@@ -40,9 +40,9 @@
     "roots/wordpress": "5.8.2",
     "roots/wp-config": "1.0.0",
     "roots/wp-password-bcrypt": "1.1.0",
-    "kviron/advanced-custom-fields": "^5.10.2",
+    "kviron/advanced-custom-fields": "*",
     "wpackagist-plugin/acf-extended":"*",
-    "wpackagist-plugin/cyr2lat":"5.2.4"
+    "wpackagist-plugin/cyr2lat":"*"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.6.0",
