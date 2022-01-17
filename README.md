@@ -110,14 +110,14 @@ dump($var);
 Важная помарка, все файлы дампов базы данных нужно хранить в папке dumps
 Есть два быстрых способа сделать дамп базы данных
 
-####WP CLI
+#### WP CLI
 
 ```sh
 wp db export ./dumps/<file_name>.sql
 ```
 На вашем сервере должен быть установлен WP CLI смотрите [инструкцию](https://wp-cli.org/)
 
-####Docker
+#### Docker
 
 ```sh
  docker exec <project_name>_db sh -c 'exec mysqldump --all-databases -uroot -p"$MYSQL_ROOT_PASSWORD"' > ./dumps/<file_name>.sql
